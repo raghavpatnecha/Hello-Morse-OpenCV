@@ -4,9 +4,7 @@ import imutils
 import dlib
 import cv2
 from morse_converter import convertMorseToText
-import time
 from collections import deque
-
 
 def eye_aspect_ratio(eye):
     A = distance.euclidean(eye[1], eye[5])
@@ -29,6 +27,7 @@ def main():
     cap = cv2.VideoCapture(0)
     flag = 0
     openEye=0
+    final = ''
     str = ''
     finalString=[]
     L = []
@@ -38,7 +37,9 @@ def main():
 
     while True:
         ret, frame = cap.read()
-        frame = imutils.resize(frame, width=450)
+        #cam1 = Camera()
+        #frame = cam1.get_frame()
+        frame = imutils.resize(frame, width=640)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         subjects = detect(gray, 0)
         for subject in subjects:
@@ -91,10 +92,12 @@ def main():
             if str != None:
                 print(str)
                 finalString.append(str)
-                print(''.join(finalString))
+                final=(''.join(finalString))
             if str==None:
                 L=[]
             L=[]
+        cv2.putText(frame, "Predicted :  " + final, (10, 470),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         cv2.imshow("Frame", frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
@@ -102,4 +105,6 @@ def main():
     cv2.destroyAllWindows()
     cap.stop()
 
-main()
+if __name__ == '__main__':
+    main()
+
