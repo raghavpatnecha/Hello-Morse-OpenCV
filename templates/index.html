@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Video Streaming Demonstration</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+if (!!window.EventSource) {
+  var source = new EventSource('/yield');
+  console.log(source)
+  source.onmessage = function(e) {
+    console.log(e.data)
+    $("#data").text(e.data);
+  }
+}
+</script>
+  </head>
+  <body>
+    <h1>Morse code</h1>
+    <img src="{{ url_for('video_feed') }}">
+    <div id="data">nothing received yet</div>
+	
+
+  </body>
+</html>
+</html>
