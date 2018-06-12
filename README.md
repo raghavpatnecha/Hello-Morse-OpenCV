@@ -13,6 +13,11 @@ This project translates morse code in plain english. We used webcam to read blin
 
 File `morse_converter.py` contains the python dictionary. For reference we have also included the Poster Cards to learn Morse better.
 
+`Short Blink : Dot ' . '`
+
+`Long Blink : Dash ' - '`
+
+`Long Long Blink : Removes the last dot or dash`
 
 # Requirements
 
