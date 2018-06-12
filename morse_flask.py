@@ -34,12 +34,15 @@ def video_feed():
 @app.route('/yield')
 def streambyte():
     L = morse.L
-    print("raghav",L)
+    final = morse.final
+    #print("raghav",L)
 
     b = (''.join(L)).encode('utf-8')
+    c = (final).encode('utf-8')
     log(b)
+    log(c)
     def events():
-        yield "data: %s\n\n" % (b)
+        yield "data: %s %s\n\n" % (b,c)
         time.sleep(1)  # an artificial delay
     return Response(events(), content_type='text/event-stream')
 
