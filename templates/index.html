@@ -1,25 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Video Streaming Demonstration</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hello Morse</title>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:600" rel="stylesheet">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 if (!!window.EventSource) {
   var source = new EventSource('/yield');
   console.log(source)
   source.onmessage = function(e) {
-    console.log(e.data)
-    $("#data").text(e.data);
+    console.log(e)
+	var byte = e.data;
+	var res = byte.split(/\s/);
+    <!--res.forEach(byte => console.log(byte)); -->
+	console.log(res[0])
+	console.log(res[1])
+    $("#morse").text(res[0].slice(1,));
+	$("#word").text(res[1].slice(1,));
   }
 }
 </script>
   </head>
   <body>
-    <h1>Morse code</h1>
-    <img src="{{ url_for('video_feed') }}">
-    <div id="data">nothing received yet</div>
-	
 
-  </body>
-</html>
+<div class="box">
+   <div class="div1">
+   <img src="{{ url_for('video_feed') }}">
+   <div class="inside">
+       
+   <span class="info">Try this&nbsp;&nbsp;
+  .... &nbsp; . &nbsp; .-..&nbsp;  .-.. &nbsp;  --- &nbsp; .-.- &nbsp; .-- &nbsp; ---  &nbsp; .-. &nbsp;  .-.. &nbsp;   -..</span>
+   <p><span class="info">Short-Blink: Dot ' . '</span>
+  <span class="info">Long-Blink: Dash ' - '</span>
+ <span class="info">Long Long-Blink: Remove dot or dash</span></p><br/>
+   </div>
+   </div>
+   <div class="div2">
+   <div class="line">HELLO</div>
+   <div class="line" id="down">MORSE</div>
+   
+   <div class="menu">
+  
+   <a href="https://github.com/raghavpatnecha/Hello-Morse-OpenCV">Source Code</a>
+  <a href="https://github.com/raghavpatnecha/Hello-Morse-OpenCV/blob/master/README.md">Docs</a>
+   <a href="https://github.com/raghavpatnecha/Hello-Morse-OpenCV/blob/master/HelloMorse-Poster-Cards-Orange.pdf">Learn Morse</a>
+
+   </div>
+   <div class="letter">
+    <div id="morse" class="info">nothing received yet</div>
+	 <div id="word" class="kbd">nothing received yet</div>
+	  
+   </div>
+   
+   <div class="inside right">
+     Project by Akshay Bahadur and Raghav Patnecha
+   </div>
+   </div>
+   <div class="clear">
+</div>
+
+</body>
 </html>
