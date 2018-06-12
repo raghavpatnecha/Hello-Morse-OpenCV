@@ -12,8 +12,6 @@ class ContextFilter(logging.Filter):
         return True
 
 def log(success):
-    if os.path.isfile("success.log"):
-        os.remove("success.log")
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
