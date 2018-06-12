@@ -104,7 +104,7 @@ class Detectmorse():
                 self.L = []
             self.L = []
         cv2.putText(frame, "Predicted :  " + self.final, (10, 470),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+                    cv2.FONT_HERSHEY_DUPLEX, 0.7, (52, 152, 219), 2)
 
         return frame
 
