@@ -68,30 +68,37 @@ class Detectmorse():
             for i in range(1, len(self.pts)):
                 if self.pts[i] > self.pts[i - 1]:
                     # print(pts[i - 1], pts[i])
-                    if self.pts[i] > 30 and self.pts[i] < 60:
-                        print("Eyes have been closed for 50 frames! - Print '-'")
-                        log("Eyes have been closed for 50 frames!")
+                    # if self.pts[i] > 30 and self.pts[i] < 60:
+                    if self.pts[i] > 20 and self.pts[i] < 40:
+                        print("Eyes have been closed for 30 frames! - Print '-'")
+                        log("Eyes have been closed for 30 frames!")
                         self.L.append("-")
                         self.pts = deque(maxlen=512)
                         break
-                    elif self.pts[i] > 15 and self.pts[i] < 30:
-                        print("Eyes have been closed for 20 frames!")
-                        log("Eyes have been closed for 20 frames! - Print '.'")
+                    # elif self.pts[i] > 15 and self.pts[i] < 30:
+                    elif self.pts[i] > 5 and self.pts[i] < 20:
+                        print("Eyes have been closed for 15 frames!")
+                        log("Eyes have been closed for 15 frames! - Print '.'")
                         self.L.append(".")
                         self.pts = deque(maxlen=512)
                         break
 
-                    elif self.pts[i] > 60:
-                        print("Eyes have been closed for 60 frames!")
-                        log("Eyes have been closed for 60 frames! - Remove morse character")
-                        self.L.pop()
+                    # elif self.pts[i] > 60:
+                    elif self.pts[i] > 40:
+                        print("Eyes have been closed for 40 frames!")
+                        log("Eyes have been closed for 40 frames! - Remove morse character")
+                        if len(self.L)>0:
+                            self.L.pop()
+                        else:
+                            print("Nothing to remove")
+                            log("Nothing to remove")
                         self.pts = deque(maxlen=512)
                         break
 
         if (self.L != []):
 
             print(self.L)
-        if self.openEye > 60:
+        if self.openEye > 50:
             if (self.L != []):
                 print(self.L)
             self.str = convertMorseToText(''.join(self.L))
